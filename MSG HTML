@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Monument Strategy Group — Strategy. Clarity. Results.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+ 
+  <style>
+    :root {
+      --ink:        #0f0e0d;
+      --ink-soft:   #3a3632;
+      --ink-muted:  #7a746c;
+      --paper:      #f5f2ec;
+      --paper-warm: #edeae2;
+      --gold:       #b8924a;
+      --gold-light: #d4ad72;
+      --rule:       rgba(184,146,74,0.25);
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans:  'DM Sans', sans-serif;
+    }
+ 
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+ 
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+ 
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1000;
+      opacity: 0.5;
+    }
+ 
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.25rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(245,242,236,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--rule);
+      transition: padding 0.3s ease;
+      gap: 2rem;
+    }
+ 
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .nav-logo span { color: var(--gold); }
+ 
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+      flex: 1;
+      justify-content: center;
+    }
+ 
+    .nav-links a {
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+      white-space: nowrap;
+    }
+    .nav-links a:hover { color: var(--gold); }
+ 
+    .nav-cta {
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+      border: 1px solid var(--gold);
+      padding: 0.55rem 1.4rem;
+      transition: all 0.25s ease;
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+    .nav-cta:hover { background: var(--gold); color: var(--paper); }
+ 
+    /* Mobile nav toggle */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--ink);
+      transition: all 0.3s ease;
+    }
+ 
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 10rem 3rem 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+ 
+    .hero-rule {
+      position: absolute;
+      top: 0; bottom: 0;
+      left: 58%;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--rule) 20%, var(--rule) 80%, transparent);
+    }
+ 
+    .hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+ 
+    .hero-eyebrow {
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.1s forwards;
+    }
+ 
+    .hero-headline {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 5vw, 5rem);
+      font-weight: 600;
+      line-height: 1.1;
+      color: var(--ink);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.25s forwards;
+    }
+    .hero-headline em { font-style: italic; color: var(--gold); }
+ 
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--ink-soft);
+      line-height: 1.75;
+      max-width: 480px;
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.4s forwards;
+    }
+ 
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.55s forwards;
+    }
+ 
+    .btn-primary {
+      display: inline-block;
+      font-family: var(--sans);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--paper);
+      background: var(--ink);
+      padding: 1rem 2.2rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--gold);
+      transform: translateX(-101%);
+      transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+    }
+    .btn-primary:hover::after { transform: translateX(0); }
+    .btn-primary span { position: relative; z-index: 1; }
+ 
+    .hero-note {
+      font-size: 0.8rem;
+      color: var(--ink-muted);
+      font-style: italic;
+    }
+ 
+    .hero-stat-block {
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.45s forwards;
+    }
+ 
+    .hero-stat {
+      border-left: 2px solid var(--gold);
+      padding-left: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+ 
+    .hero-stat-num {
+      font-family: var(--serif);
+      font-size: 3.5rem;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+ 
+    .hero-stat-label {
+      font-size: 0.82rem;
+      color: var(--ink-muted);
+      letter-spacing: 0.05em;
+    }
+ 
+    .hero-pullquote {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      font-style: italic;
+      color: var(--ink-soft);
+      line-height: 1.5;
+      border-top: 1px solid var(--rule);
+      padding-top: 1.5rem;
+    }
+ 
+    /* ── SECTION STYLES ── */
+    section { padding: 7rem 3rem; }
+ 
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+ 
+    .section-label {
+      font-family: var(--sans);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 2rem;
+      height: 1px;
+      background: var(--gold);
+    }
+ 
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(2.2rem, 3.5vw, 3.5rem);
+      font-weight: 600;
+      line-height: 1.15;
+      color: var(--ink);
+      margin-bottom: 1.5rem;
+    }
+    .section-title em { font-style: italic; color: var(--gold); }
+ 
+    .section-body {
+      font-size: 1.05rem;
+      color: var(--ink-soft);
+      max-width: 640px;
+      line-height: 1.85;
+    }
+ 
+    /* ── PROBLEM ── */
+    #problem { background: var(--ink); }
+    #problem .section-label { color: var(--gold-light); }
+    #problem .section-label::before { background: var(--gold-light); }
+    #problem .section-title { color: var(--paper); }
+    #problem .section-title em { color: var(--gold-light); }
+ 
+    .problem-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+      margin-top: 3.5rem;
+    }
+ 
+    .problem-body {
+      font-size: 1.1rem;
+      color: rgba(245,242,236,0.75);
+      line-height: 1.9;
+    }
+    .problem-body p + p { margin-top: 1.25rem; }
+    .problem-body strong { color: var(--paper); font-weight: 400; }
+ 
+    .problem-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .problem-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      font-size: 0.95rem;
+      color: rgba(245,242,236,0.7);
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(184,146,74,0.15);
+    }
+    .problem-list li:last-child { border-bottom: none; }
+    .problem-list li::before {
+      content: '→';
+      color: var(--gold-light);
+      flex-shrink: 0;
+      margin-top: 0.05rem;
+    }
+ 
+    /* ── WHAT WE DO ── */
+    #what {
+      background: var(--paper-warm);
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+    }
+ 
+    .phases {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 4rem;
+      background: var(--rule);
+    }
+ 
+    .phase {
+      background: var(--paper-warm);
+      padding: 3rem 2.5rem;
+      position: relative;
+      transition: background 0.3s ease;
+    }
+    .phase:hover { background: var(--paper); }
+ 
+    .phase-num {
+      font-family: var(--serif);
+      font-size: 5rem;
+      font-weight: 600;
+      color: rgba(184,146,74,0.12);
+      line-height: 1;
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+    }
+ 
+    .phase-label {
+      font-family: var(--sans);
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+    }
+ 
+    .phase-title {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 1rem;
+    }
+ 
+    .phase-body {
+      font-size: 0.92rem;
+      color: var(--ink-muted);
+      line-height: 1.75;
+    }
+ 
+    /* ── SERVICES ── */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 4rem;
+    }
+ 
+    .service-card {
+      border: 1px solid var(--rule);
+      padding: 2.5rem;
+      position: relative;
+      transition: border-color 0.3s ease, transform 0.3s ease;
+      background: var(--paper);
+    }
+    .service-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-4px);
+    }
+ 
+    .service-tag {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--paper);
+      background: var(--gold);
+      padding: 0.3rem 0.75rem;
+      display: inline-block;
+      margin-bottom: 1.5rem;
+    }
+ 
+    .service-title {
+      font-family: var(--serif);
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+ 
+    .service-meta {
+      font-size: 0.8rem;
+      color: var(--gold);
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      margin-bottom: 1.25rem;
+    }
+ 
+    .service-divider {
+      width: 2rem;
+      height: 1px;
+      background: var(--rule);
+      margin-bottom: 1.25rem;
+    }
+ 
+    .service-body {
+      font-size: 0.9rem;
+      color: var(--ink-muted);
+      line-height: 1.75;
+      margin-bottom: 1.5rem;
+    }
+ 
+    .service-link {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: gap 0.2s ease;
+    }
+    .service-link:hover { gap: 0.85rem; }
+ 
+    /* ── HOW IT WORKS ── */
+    #process { background: var(--paper-warm); }
+ 
+    .process-steps {
+      margin-top: 4rem;
+      display: flex;
+      flex-direction: column;
+    }
+ 
+    .process-step {
+      display: grid;
+      grid-template-columns: 5rem 1fr;
+      gap: 2rem;
+      padding: 2.5rem 0;
+      border-bottom: 1px solid var(--rule);
+      align-items: start;
+      transition: padding-left 0.3s ease;
+    }
+    .process-step:first-child { border-top: 1px solid var(--rule); }
+    .process-step:hover { padding-left: 1rem; }
+ 
+    .step-num {
+      font-family: var(--serif);
+      font-size: 3rem;
+      font-weight: 600;
+      color: var(--gold);
+      opacity: 0.4;
+      line-height: 1;
+      padding-top: 0.2rem;
+    }
+ 
+    .step-title {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+ 
+    .step-body {
+      font-size: 0.93rem;
+      color: var(--ink-muted);
+      line-height: 1.75;
+    }
+ 
+    /* ── TEAM ── */
+    #team { background: var(--paper); }
+ 
+    .team-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-top: 4rem;
+    }
+ 
+    .team-card {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 2rem;
+      align-items: start;
+      padding: 2.5rem;
+      border: 1px solid var(--rule);
+      transition: border-color 0.3s ease;
+    }
+    .team-card:hover { border-color: var(--gold); }
+ 
+    .team-photo {
+      width: 160px;
+      height: 190px;
+      object-fit: cover;
+      display: block;
+      background: var(--paper-warm);
+      border: 1px solid var(--rule);
+      /* Placeholder styling — replace src with real photo */
+      position: relative;
+    }
+ 
+    .team-photo-placeholder {
+      width: 160px;
+      height: 190px;
+      background: var(--paper-warm);
+      border: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+ 
+    .team-photo-placeholder svg {
+      width: 48px;
+      height: 48px;
+      opacity: 0.2;
+    }
+ 
+    .team-info {}
+ 
+    .team-name {
+      font-family: var(--serif);
+      font-size: 1.75rem;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.1;
+      margin-bottom: 0.25rem;
+    }
+ 
+    .team-title {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.25rem;
+    }
+ 
+    .team-divider {
+      width: 2rem;
+      height: 1px;
+      background: var(--rule);
+      margin-bottom: 1.25rem;
+    }
+ 
+    .team-bio {
+      font-size: 0.9rem;
+      color: var(--ink-muted);
+      line-height: 1.8;
+    }
+ 
+ 
+    /* ── FAQ ── */
+    #faq {}
+ 
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      margin-top: 4rem;
+      background: var(--rule);
+    }
+ 
+    .faq-item {
+      background: var(--paper);
+      padding: 2.5rem;
+    }
+ 
+    .faq-q {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+ 
+    .faq-a {
+      font-size: 0.9rem;
+      color: var(--ink-muted);
+      line-height: 1.8;
+    }
+ 
+    /* ── CTA BANNER ── */
+    #cta {
+      background: var(--ink);
+      padding: 8rem 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+ 
+    #cta::before {
+      content: 'MSG';
+      position: absolute;
+      font-family: var(--serif);
+      font-size: 22vw;
+      font-weight: 700;
+      color: rgba(184,146,74,0.04);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      letter-spacing: -0.02em;
+    }
+ 
+    .cta-inner { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+ 
+    .cta-eyebrow {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      margin-bottom: 1.5rem;
+    }
+ 
+    .cta-title {
+      font-family: var(--serif);
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 600;
+      color: var(--paper);
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+    .cta-title em { font-style: italic; color: var(--gold-light); }
+ 
+    .cta-body {
+      font-size: 1rem;
+      color: rgba(245,242,236,0.6);
+      line-height: 1.75;
+      margin-bottom: 3rem;
+    }
+ 
+    .btn-cta {
+      display: inline-block;
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--ink);
+      background: var(--gold);
+      padding: 1.1rem 2.8rem;
+      transition: all 0.3s ease;
+    }
+    .btn-cta:hover { background: var(--gold-light); transform: translateY(-2px); }
+ 
+    .cta-fine {
+      margin-top: 1.5rem;
+      font-size: 0.78rem;
+      color: rgba(245,242,236,0.35);
+      font-style: italic;
+    }
+ 
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      border-top: 1px solid rgba(184,146,74,0.15);
+      padding: 2.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+ 
+    .footer-logo {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--paper);
+    }
+    .footer-logo span { color: var(--gold); }
+ 
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+ 
+    .footer-links a {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(245,242,236,0.4);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--gold-light); }
+ 
+    .footer-copy {
+      font-size: 0.75rem;
+      color: rgba(245,242,236,0.25);
+    }
+ 
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+ 
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+ 
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .nav-links { gap: 1.25rem; }
+    }
+ 
+    @media (max-width: 900px) {
+      nav { padding: 1.25rem 1.5rem; }
+      section { padding: 5rem 1.5rem; }
+      #hero { padding: 8rem 1.5rem 5rem; }
+ 
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0; right: 0;
+        background: rgba(245,242,236,0.98);
+        flex-direction: column;
+        gap: 0;
+        border-bottom: 1px solid var(--rule);
+        padding: 1rem 0;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links li { width: 100%; }
+      .nav-links a {
+        display: block;
+        padding: 0.85rem 1.5rem;
+        border-bottom: 1px solid var(--rule);
+      }
+      .nav-links li:last-child a { border-bottom: none; }
+      .nav-hamburger { display: flex; }
+ 
+      .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .hero-rule { display: none; }
+      .hero-stat-block { border-top: 1px solid var(--rule); padding-top: 2rem; }
+ 
+      .problem-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .phases { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: 1fr; }
+      .team-grid { grid-template-columns: 1fr; }
+      .team-card { grid-template-columns: 120px 1fr; }
+      .team-photo-placeholder { width: 120px; height: 150px; }
+      .faq-grid { grid-template-columns: 1fr; }
+      .process-step { grid-template-columns: 3.5rem 1fr; }
+ 
+      footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+      .footer-links { flex-wrap: wrap; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+ 
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-logo">Monument<span>.</span></a>
+ 
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#problem" onclick="closeNav()">The Problem</a></li>
+      <li><a href="#what" onclick="closeNav()">What We Do</a></li>
+      <li><a href="#services" onclick="closeNav()">Services</a></li>
+      <li><a href="#process" onclick="closeNav()">How It Works</a></li>
+      <li><a href="#team" onclick="closeNav()">Our Team</a></li>
+      <li><a href="#faq" onclick="closeNav()">FAQ</a></li>
+    </ul>
+ 
+    <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </button>
+ 
+    <a href="https://calendly.com/monumentstrategygroup/30min" target="_blank" class="nav-cta">Book a Call</a>
+  </nav>
+ 
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-rule"></div>
+    <div class="hero-inner">
+      <div class="hero-left">
+        <p class="hero-eyebrow">Operational Strategy Partner</p>
+        <h1 class="hero-headline">
+          The money is already<br /><em>in your business.</em>
+        </h1>
+        <p class="hero-sub">
+          Monument Strategy Group finds where profit is being lost in companies between $2M and $30M in revenue — then stays on until the strategy actually works.
+        </p>
+        <div class="hero-actions">
+          <a href="https://calendly.com/monumentstrategygroup/30min" target="_blank" class="btn-primary">
+            <span>Book a Free Discovery Call</span>
+          </a>
+          <span class="hero-note">30 minutes. No pitch.</span>
+        </div>
+      </div>
+ 
+      <div class="hero-stat-block">
+        <div class="hero-stat">
+          <div class="hero-stat-num">$2M–$30M</div>
+          <div class="hero-stat-label">Revenue range we serve</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">3</div>
+          <div class="hero-stat-label">Phase engagement: Audit → Strategy → Implement</div>
+        </div>
+        <p class="hero-pullquote">
+          "I wish we had done this sooner." — clients, consistently.
+        </p>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- PROBLEM -->
+  <section id="problem">
+    <div class="section-inner">
+      <p class="section-label reveal">The Problem</p>
+      <h2 class="section-title reveal" style="color:var(--paper);">
+        Your business is working.<br /><em>Just not efficiently enough.</em>
+      </h2>
+      <div class="problem-grid">
+        <div class="problem-body reveal">
+          <p>Most companies between $2M and $30M in revenue are leaving money on the table — and they don't know exactly where or how much.</p>
+          <p>Vendors are being overpaid. Overhead has crept up unchecked. Operational processes are creating invisible drag. <strong>Spend that made sense at $2M is quietly killing margin at $15M.</strong></p>
+          <p>Founders and leadership teams are too close to it — and too busy running the company — to step back and see where the real losses are hiding.</p>
+          <p>A full-time hire isn't the answer. A consulting report that sits on a shelf isn't either. What you need is someone who can <strong>find the money, build the strategy to recover it, and stay in the room until it actually happens.</strong></p>
+        </div>
+        <ul class="problem-list reveal">
+          <li>Founder-led companies generating $2M–$30M in revenue</li>
+          <li>Businesses where margin is under pressure but the root cause isn't clear</li>
+          <li>Companies preparing for a growth phase, capital raise, or ownership transition</li>
+          <li>Leadership teams that know something is inefficient but lack the bandwidth to diagnose it</li>
+          <li>Organizations making decisions on instinct rather than financial clarity</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- WHAT WE DO -->
+  <section id="what">
+    <div class="section-inner">
+      <p class="section-label reveal">What We Do</p>
+      <h2 class="section-title reveal">
+        We find the margin.<br /><em>Then we recover it.</em>
+      </h2>
+      <p class="section-body reveal">
+        Monument Strategy Group serves as your Operational Strategy Partner — an embedded senior advisor who audits your financials, identifies where profit is being lost, builds a clear strategy to recover it, and stays on through implementation to make sure the plan translates into real results.
+      </p>
+ 
+      <div class="phases reveal">
+        <div class="phase">
+          <div class="phase-num">01</div>
+          <div class="phase-label">Phase One</div>
+          <div class="phase-title">Audit</div>
+          <p class="phase-body">Deep P&L review to identify waste, inefficiency, and misallocated spend. We find exactly where money is being lost and quantify the opportunity.</p>
+        </div>
+        <div class="phase">
+          <div class="phase-num">02</div>
+          <div class="phase-label">Phase Two</div>
+          <div class="phase-title">Strategy</div>
+          <p class="phase-body">A prioritized roadmap to recover margin and build sustainable operational efficiency — ranked by ROI, with clear recommendations on what to fix first.</p>
+        </div>
+        <div class="phase">
+          <div class="phase-num">03</div>
+          <div class="phase-label">Phase Three</div>
+          <div class="phase-title">Implement</div>
+          <p class="phase-body">We stay on as your embedded partner to drive execution and hold the plan accountable. We work with your leadership — not around them.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="section-inner">
+      <p class="section-label reveal">Our Services</p>
+      <h2 class="section-title reveal">Three ways<br /><em>to engage.</em></h2>
+ 
+      <div class="services-grid">
+        <div class="service-card reveal">
+          <div class="service-tag">Project-Based</div>
+          <h3 class="service-title">The Profit Diagnostic</h3>
+          <p class="service-meta">2–4 Weeks</p>
+          <div class="service-divider"></div>
+          <p class="service-body">A structured deep dive into your P&L, vendor spend, overhead, and operational costs. We identify where money is being wasted, benchmark against industry norms, and deliver a prioritized roadmap ranked by ROI.</p>
+          <a href="https://calendly.com/monumentstrategygroup/30min" target="_blank" class="service-link">Schedule a call →</a>
+        </div>
+ 
+        <div class="service-card reveal">
+          <div class="service-tag">Monthly Retainer</div>
+          <h3 class="service-title">Operational Strategy Partnership</h3>
+          <p class="service-meta">Ongoing</p>
+          <div class="service-divider"></div>
+          <p class="service-body">Monument stays on as your embedded Operational Strategy Partner. We work alongside your leadership team to drive implementation, track results against a baseline, and ensure improvements translate to real margin.</p>
+          <a href="https://calendly.com/monumentstrategygroup/30min" target="_blank" class="service-link">Schedule a call →</a>
+        </div>
+ 
+        <div class="service-card reveal">
+          <div class="service-tag">Fixed Fee</div>
+          <h3 class="service-title">Focused Strategy Sprint</h3>
+          <p class="service-meta">90 Days</p>
+          <div class="service-divider"></div>
+          <p class="service-body">A time-boxed, outcome-focused engagement targeting one critical problem — renegotiating vendor contracts, restructuring overhead, or building financial infrastructure for a growth phase.</p>
+          <a href="https://calendly.com/monumentstrategygroup/30min" target="_blank" class="service-link">Schedule a call →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- HOW IT WORKS -->
+  <section id="process">
+    <div class="section-inner">
+      <p class="section-label reveal">How It Works</p>
+      <h2 class="section-title reveal">Low-risk to start.<br /><em>High-impact by design.</em></h2>
+ 
+      <div class="process-steps">
+        <div class="process-step reveal">
+          <div class="step-num">01</div>
+          <div class="step-content">
+            <h3 class="step-title">Discovery</h3>
+            <p class="step-body">A 30-minute conversation to understand your business, your goals, and where you believe money is being lost. No pitch — just listening. If we're a fit, we move to a diagnostic.</p>
+          </div>
+        </div>
+        <div class="process-step reveal">
+          <div class="step-num">02</div>
+          <div class="step-content">
+            <h3 class="step-title">Diagnose</h3>
+            <p class="step-body">We conduct The Profit Diagnostic — a structured 2–4 week audit of your P&L, vendor relationships, overhead structure, and operational spend. We identify exactly where money is being lost and quantify the opportunity.</p>
+          </div>
+        </div>
+        <div class="process-step reveal">
+          <div class="step-num">03</div>
+          <div class="step-content">
+            <h3 class="step-title">Strategize</h3>
+            <p class="step-body">We build a prioritized strategy — specific initiatives ranked by impact, effort, and ROI. Quick wins that generate immediate margin improvement alongside structural changes for long-term efficiency. You approve the plan before anything is executed.</p>
+          </div>
+        </div>
+        <div class="process-step reveal">
+          <div class="step-num">04</div>
+          <div class="step-content">
+            <h3 class="step-title">Implement</h3>
+            <p class="step-body">We stay on as your Operational Strategy Partner to drive execution alongside your team. We track progress against a financial baseline, report on savings recovered, and adjust the strategy as real-world results come in. The engagement ends when the work is done — not on an arbitrary timeline.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- TEAM -->
+  <section id="team">
+    <div class="section-inner">
+      <p class="section-label reveal">Our Team</p>
+      <h2 class="section-title reveal">The people<br /><em>behind the work.</em></h2>
+ 
+      <div class="team-grid">
+ 
+        <div class="team-card reveal">
+          <!-- Replace the placeholder below with: <img src="your-photo.jpg" alt="Partner Name" class="team-photo"> -->
+          <div class="team-photo-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="8" r="4" stroke="#b8924a" stroke-width="1.5"/>
+              <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#b8924a" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="team-info">
+            <h3 class="team-name">Your Name Here</h3>
+            <p class="team-title">Co-Founder &amp; Partner</p>
+            <div class="team-divider"></div>
+            <p class="team-bio">Replace this with your bio. A confident, human paragraph about your background, the industries you've worked in, and why you started Monument Strategy Group. Clients want to know who they're trusting with their business.</p>
+          </div>
+        </div>
+ 
+        <div class="team-card reveal">
+          <!-- Replace the placeholder below with: <img src="partner-photo.jpg" alt="Partner Name" class="team-photo"> -->
+          <div class="team-photo-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="8" r="4" stroke="#b8924a" stroke-width="1.5"/>
+              <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#b8924a" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="team-info">
+            <h3 class="team-name">Partner Name Here</h3>
+            <p class="team-title">Co-Founder &amp; Partner</p>
+            <div class="team-divider"></div>
+            <p class="team-bio">Replace this with your partner's bio. Same idea — confident, specific, human. What did they do before this? What do they bring to engagements that clients can't get elsewhere? What's their operational or financial superpower?</p>
+          </div>
+        </div>
+ 
+      </div>
+    </div>
+  </section>
+ 
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="section-inner">
+      <p class="section-label reveal">FAQ</p>
+      <h2 class="section-title reveal">Common questions,<br /><em>straight answers.</em></h2>
+ 
+      <div class="faq-grid reveal">
+        <div class="faq-item">
+          <p class="faq-q">Is the investment worth it for a business our size?</p>
+          <p class="faq-a">Monument anchors fees to value, not hours. If an engagement surfaces $300K in recoverable profit, the fee is not the number to optimize on. We offer 50% upfront payment on all project-based work, and annual retainer commitments receive a 10% discount.</p>
+        </div>
+        <div class="faq-item">
+          <p class="faq-q">How much of our team's time does this require?</p>
+          <p class="faq-a">Minimal. We work alongside your leadership — not around them — and we do the heavy lifting. For the Profit Diagnostic, expect focused sessions rather than constant involvement. For ongoing partnerships, we set a working cadence that fits your schedule.</p>
+        </div>
+        <div class="faq-item">
+          <p class="faq-q">How do you handle confidentiality?</p>
+          <p class="faq-a">Strictly. All engagements are governed by a Master Services Agreement and Statement of Work. Monument Strategy Group carries professional liability (E&O) insurance. Your financials, strategy, and business information stay private.</p>
+        </div>
+        <div class="faq-item">
+          <p class="faq-q">What's the realistic ROI?</p>
+          <p class="faq-a">It varies by business, but the Profit Diagnostic alone consistently surfaces recoverable margin opportunities that dwarf the engagement fee. We quantify every opportunity with ROI projections before you commit to implementation.</p>
+        </div>
+        <div class="faq-item">
+          <p class="faq-q">Do you take over management of our team?</p>
+          <p class="faq-a">No. Monument Strategy Group does not manage your team. We work with your leadership to drive change — not around them. Think of us as a senior strategic partner embedded alongside you, not a new layer of management.</p>
+        </div>
+        <div class="faq-item">
+          <p class="faq-q">How do we get started?</p>
+          <p class="faq-a">Book a complimentary 30-minute discovery call. We listen, share whether and how we can help, and if there's a fit, you receive a proposal within 5 business days.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- CTA -->
+  <section id="cta">
+    <div class="cta-inner">
+      <p class="cta-eyebrow reveal">Ready to Find the Money?</p>
+      <h2 class="cta-title reveal">
+        The inefficiency is already<br /><em>costing you.</em>
+      </h2>
+      <p class="cta-body reveal">
+        The most common thing we hear from clients at the end of an engagement is: "I wish we had done this sooner." The only question is how long you want to wait before doing something about it.
+      </p>
+      <a href="https://calendly.com/monumentstrategygroup/30min" target="_blank" class="btn-cta reveal">
+        Book a Free Discovery Call
+      </a>
+      <p class="cta-fine reveal">30 minutes · No pitch · No pressure · Proposal within 5 business days if there's a fit</p>
+    </div>
+  </section>
+ 
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Monument<span>.</span></div>
+    <ul class="footer-links">
+      <li><a href="#what">What We Do</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#team">Our Team</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="https://calendly.com/monumentstrategygroup/30min" target="_blank">Book a Call</a></li>
+    </ul>
+    <p class="footer-copy">© 2026 Monument Strategy Group</p>
+  </footer>
+ 
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const siblings = Array.from(entry.target.parentElement.children);
+          const delay = 80 * siblings.indexOf(entry.target);
+          setTimeout(() => entry.target.classList.add('visible'), delay);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+ 
+    // Nav shrink on scroll
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      nav.style.padding = window.scrollY > 60 ? '0.9rem 3rem' : '1.25rem 3rem';
+    });
+ 
+    // Mobile nav toggle
+    function toggleNav() {
+      document.getElementById('navLinks').classList.toggle('open');
+    }
+    function closeNav() {
+      document.getElementById('navLinks').classList.remove('open');
+    }
+ 
+    // Active nav link highlight on scroll
+    const sections = document.querySelectorAll('section[id]');
+    const navAnchors = document.querySelectorAll('.nav-links a');
+ 
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        if (window.scrollY >= section.offsetTop - 120) {
+          current = section.getAttribute('id');
+        }
+      });
+      navAnchors.forEach(a => {
+        a.style.color = a.getAttribute('href') === '#' + current
+          ? 'var(--gold)'
+          : '';
+      });
+    });
+  </script>
+</body>
+</html>
