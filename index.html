@@ -61,16 +61,21 @@
     }
 
     .nav-logo {
-      font-family: var(--serif);
-      font-size: 1.1rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--ink);
       text-decoration: none;
       flex-shrink: 0;
+      display: flex;
+      align-items: center;
     }
-    .nav-logo span { color: var(--gold); }
+    .nav-logo img {
+      height: 44px;
+      width: auto;
+      display: block;
+    }
+    .footer-logo img {
+      height: 48px;
+      width: auto;
+      display: block;
+    }
 
     .nav-links {
       display: flex;
@@ -832,7 +837,9 @@
 
   <!-- NAV -->
   <nav>
-    <a href="#hero" class="nav-logo">Monument<span>.</span></a>
+    <a href="#hero" class="nav-logo">
+      <img src="logo.png" alt="Monument Strategy Group" />
+    </a>
 
     <ul class="nav-links" id="navLinks">
       <li><a href="#problem" onclick="closeNav()">The Problem</a></li>
@@ -919,7 +926,7 @@
         We find the margin.<br /><em>Then we recover it.</em>
       </h2>
       <p class="section-body reveal">
-        Monument Strategy Group serves as your Operational Strategy Partner — an embedded senior advisor who audits your financials, identifies where profit is being lost, builds a clear strategy to recover it, and stays on through implementation to make sure the plan translates into real results.
+        Monument Strategy Group serves as your Operational Strategy Partner — an embedded team of advisors who audits your financials, identifies where profit is being lost, builds a clear strategy to recover it, and stays on through implementation to make sure the plan translates into real results.
       </p>
 
       <div class="phases reveal">
@@ -1074,7 +1081,7 @@
       <div class="faq-grid reveal">
         <div class="faq-item">
           <p class="faq-q">Is the investment worth it for a business our size?</p>
-          <p class="faq-a">Monument anchors fees to value, not hours. If an engagement surfaces $300K in recoverable profit, the fee is not the number to optimize on. We offer 50% upfront payment on all project-based work, and annual retainer commitments receive a 10% discount.</p>
+          <p class="faq-a">Monument anchors fees to value, not hours. As part of our diagnostic approach, we target value adds and cost savings to tailor our fees appropriately. We are in the relationship business, so we do not accept a client unless it is clear we can bring significant ROI.</p>
         </div>
         <div class="faq-item">
           <p class="faq-q">How much of our team's time does this require?</p>
@@ -1082,7 +1089,7 @@
         </div>
         <div class="faq-item">
           <p class="faq-q">How do you handle confidentiality?</p>
-          <p class="faq-a">Strictly. All engagements are governed by a Master Services Agreement and Statement of Work. Monument Strategy Group carries professional liability (E&O) insurance. Your financials, strategy, and business information stay private.</p>
+          <p class="faq-a">Strictly. All engagements are governed by a Master Services Agreement and Statement of Work. Your financials, strategy, and business information stay private.</p>
         </div>
         <div class="faq-item">
           <p class="faq-q">What's the realistic ROI?</p>
@@ -1090,7 +1097,7 @@
         </div>
         <div class="faq-item">
           <p class="faq-q">Do you take over management of our team?</p>
-          <p class="faq-a">No. Monument Strategy Group does not manage your team. We work with your leadership to drive change — not around them. Think of us as a senior strategic partner embedded alongside you, not a new layer of management.</p>
+          <p class="faq-a">No. Monument Strategy Group does not manage your team. We work with your leadership to drive change. Think of us as a senior strategic partner embedded alongside you, not a new layer of management.</p>
         </div>
         <div class="faq-item">
           <p class="faq-q">How do we get started?</p>
@@ -1119,7 +1126,7 @@
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-logo">Monument<span>.</span></div>
+    <div class="footer-logo"><img src="logo.png" alt="Monument Strategy Group" /></div>
     <ul class="footer-links">
       <li><a href="#what">What We Do</a></li>
       <li><a href="#services">Services</a></li>
