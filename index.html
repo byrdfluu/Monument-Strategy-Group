@@ -65,12 +65,22 @@
       flex-shrink: 0;
       display: flex;
       align-items: center;
+      gap: 0.75rem;
     }
     .nav-logo img {
       height: 44px;
       width: auto;
       display: block;
     }
+    .nav-logo-text {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+    .nav-logo-text span { color: var(--gold); }
     .footer-logo img {
       height: 48px;
       width: auto;
@@ -839,6 +849,7 @@
   <nav>
     <a href="#hero" class="nav-logo">
       <img src="logo.png" alt="Monument Strategy Group" />
+      <span class="nav-logo-text">Monument<span>.</span></span>
     </a>
 
     <ul class="nav-links" id="navLinks">
