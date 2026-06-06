@@ -563,24 +563,23 @@
     }
 
     .team-card {
-      display: grid;
-      grid-template-columns: 160px 1fr;
-      gap: 2rem;
-      align-items: start;
       padding: 2.5rem;
       border: 1px solid var(--rule);
       transition: border-color 0.3s ease;
+      overflow: hidden;
     }
     .team-card:hover { border-color: var(--gold); }
 
     .team-photo {
-      width: 160px;
-      height: 190px;
+      float: left;
+      width: 150px;
+      height: 180px;
       object-fit: cover;
       object-position: center top;
       display: block;
-      flex-shrink: 0;
+      margin: 0 1.75rem 1rem 0;
       border: 1px solid var(--rule);
+      flex-shrink: 0;
     }
 
     .team-photo-placeholder {
@@ -832,8 +831,7 @@
       .phases { grid-template-columns: 1fr; }
       .services-grid { grid-template-columns: 1fr; }
       .team-grid { grid-template-columns: 1fr; }
-      .team-card { grid-template-columns: 120px 1fr; }
-      .team-photo-placeholder { width: 120px; height: 150px; }
+      .team-photo { width: 110px; height: 135px; margin: 0 1.25rem 0.75rem 0; }
       .faq-grid { grid-template-columns: 1fr; }
       .process-step { grid-template-columns: 3.5rem 1fr; }
 
@@ -1058,7 +1056,8 @@
             <h3 class="team-name">Juwan Byrd</h3>
             <p class="team-title">Co-Founder &amp; Partner</p>
             <div class="team-divider"></div>
-            <p class="team-bio">Juwan's path into business strategy was shaped by years inside some of America's largest enterprises — witnessing firsthand how operational inefficiency and strategic drift silently erode what good companies are trying to build. That experience, combined with hands-on consultancy work with founder-led businesses and a commitment to educating the next generation of operators at the college level, gave him a clear conviction: small businesses built on real innovation and a hunger for freedom deserve the same caliber of strategic thinking that Fortune 500 companies pay millions for. Armed with Lean Six Sigma, Business Analytics, and a sharp command of AI-driven execution, his work at Monument Strategy Group exists to give those founders the strategic partner they've always needed but never had access to.</p>
+            <p class="team-bio">Juwan's path into business strategy was shaped by years inside some of America's largest enterprises — witnessing firsthand how operational inefficiency and strategic drift silently erode what good companies are trying to build. That experience, combined with hands-on consultancy work with founder-led businesses and a commitment to educating the next generation of operators at the college level, gave him a clear conviction: small businesses deserve the same caliber of strategic thinking that Fortune 500 companies pay millions for.</p>
+            <p class="team-bio" style="margin-top:0.85rem;">Armed with Lean Six Sigma, Business Analytics, and a sharp command of AI-driven execution, his work at Monument Strategy Group exists to give founders the strategic partner they've always needed but never had access to.</p>
           </div>
         </div>
 
@@ -1068,7 +1067,8 @@
             <h3 class="team-name">Philip Conjerti</h3>
             <p class="team-title">Co-Founder &amp; Partner</p>
             <div class="team-divider"></div>
-            <p class="team-bio">Philip J. Conjerti is a financial strategist and educator with nearly 20 years of experience bridging the gap between underserved communities and economic opportunity — work that spans Title I classrooms, the United States Army, and a financial firm he founded in Virginia focused on education-driven empowerment. His latest work centers on engaging small business owners in building wealth through operational efficiency, with a long-term vision of expanding philanthropic impact — a mission that aligns directly with the strategic and operational work we do at Monument Strategy Group.</p>
+            <p class="team-bio">Philip J. Conjerti is a financial strategist and educator with nearly 20 years of experience bridging the gap between underserved communities and economic opportunity — work that spans Title I classrooms, the United States Army, and a financial firm he founded in Virginia focused on education-driven empowerment.</p>
+            <p class="team-bio" style="margin-top:0.85rem;">His latest work centers on engaging small business owners in building wealth through operational efficiency, with a long-term vision of expanding philanthropic impact — a mission that aligns directly with the strategic and operational work we do at Monument Strategy Group.</p>
           </div>
         </div>
 
